@@ -173,7 +173,8 @@ switch get(hfig,'selectiontype')
         cb_buttonpress = getappdata(hfig,'cb_buttonpress');
         
         cb_buttonpress(hfig,eventdata)
-    case 'extend' % shift
+    case 'extend'
+        % shift+click
         cfg.dipmom = cb_setmom(hfig, eventdata);
 end
 opt = getappdata(hfig,'opt');
@@ -193,6 +194,7 @@ end
 
 
 function mom = cb_setmom(h, eventdata)
+% setting momentum of the dipole
 
 h   = getparent(h);
 opt = getappdata(h, 'opt');
@@ -208,10 +210,13 @@ ijk = ijkorig;
 if ~isempty(tag)
     if strcmp(tag, 'ik')
         ijk([1 3])  = round(pos([1 3]));
+        ijk(2) = ijkorig(2) + opt.ijkmom(2);
     elseif strcmp(tag, 'ij')
         ijk([1 2])  = round(pos([1 2]));
+        ijk(3) = ijkorig(3) + opt.ijkmom(2);
     elseif strcmp(tag, 'jk')
         ijk([2 3])  = round(pos([2 3]));
+        ijk(1) = ijkorig(1) + opt.ijkmom(2);
     end
 end
 opt.ijkmom = ijk(:) - ijkorig(:);

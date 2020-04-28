@@ -1,4 +1,4 @@
-# ft_dipole_simu_MEEG
+# ft_dipole_topo_MEEG
 
 Dipole scalp topography simulator for [FieldTrip toolbox](https://github.com/fieldtrip/fieldtrip) users.
 

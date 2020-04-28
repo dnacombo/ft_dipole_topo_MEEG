@@ -1,8 +1,8 @@
-function dipole_simu_MEEG
+function ft_dipole_topo_MEEG
 
 % A simple interactive simulator for EEG and MEG topographies.
 % 
-% dipole_simu_MEEG raises a figure with three orthogonal brain slices. A
+% ft_dipole_topo_MEEG raises a figure with three orthogonal brain slices. A
 % dipole (defined with left click on the slices) stands at the intersection
 % of the slices, with orientation (defined with shift + click on the
 % slices) shown as an arrow head. The projection of the magnetic and
@@ -14,7 +14,7 @@ function dipole_simu_MEEG
 % The EEG layout is taken from a standard 10-10 montage with 74 electrodes.
 % The MEG head model is a standard single-shell head model. The EEG head
 % model is a standard boundary element model. Both head models are found
-% in the FieldTrip toolbox's template directory.
+% in the FieldTrip toolbox template directory.
 % The 3D MRI is the single subject T1 MRI found in Fieldtrip's template
 % directory.
 % The atlas used to name areas is the Brainnetome atlas found in
@@ -28,24 +28,21 @@ function dipole_simu_MEEG
 % any later version).
 
 
-
-
-%addpath('/home/maximilien.chaumon/ownCloud/MATLAB/fieldtrip/')
 global ft_default
 ft_default.showcallinfo = 'no';
 try
-    
     ft_defaults
 catch
     error('You need the FieldTrip Toolbox https://github.com/fieldtrip/fieldtrip')
 end
 
-load MEEG_game
-if 0
+try
+    load MEEG_game
+catch
     % the code below was used to create the data stored in MEEG_game.mat
     ft_home = fileparts(which('ft_defaults'));
-    load('/home/maximilien.chaumon/owncloud/Lab/Projects/REST/data_all_manips/NETBCI/netbci01_s01/160707/resting_state01_tsss_nobad_data.mat')
-    grad = ft_convert_units(data.grad,'mm');elec = ft_convert_units(data.elec,'mm');
+    load('grad_elec.mat')
+    grad = ft_convert_units(grad,'mm');elec = ft_convert_units(elec,'mm');
     load(fullfile(ft_home,'template/headmodel/standard_bem.mat'))
     hmeeg = vol;clear vol
     load(fullfile(ft_home,'template/headmodel/standard_singleshell.mat'))
@@ -57,7 +54,7 @@ if 0
     
     cfg = [];
     cfg.parameter = {'anatomy'};
-    mri = ft_sourceinterpolate(cfg,mri,brainnetome)
+    mri = ft_sourceinterpolate(cfg,mri,brainnetome);
     mri.tissue = brainnetome.tissue;
     mri.tissuelabel = brainnetome.tissuelabel;
     
@@ -110,6 +107,7 @@ if 0
     
     [hmmeg,grad] = ft_prepare_vol_sens(hmmeg,grad);
     [hmeeg,elec] = ft_prepare_vol_sens(hmeeg,elec);
+    save MEEG_game dipmom dippos elec grad hmeeg hmmeg layeeg laymegmag laymegplan mri
 end
 
 cfg = [];
@@ -287,7 +285,7 @@ switch get(hfig,'selectiontype')
         cb_buttonpress(hfig,eventdata)
     case 'extend'
         % shift+click
-        cfg.dipmom = cb_setmom(hfig, eventdata);
+        cb_setmom(hfig, eventdata);
 end
 opt = getappdata(hfig,'opt');
 

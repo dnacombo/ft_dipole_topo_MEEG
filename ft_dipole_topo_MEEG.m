@@ -65,10 +65,10 @@ catch
     % tmpcfg = ft_interactiverealign(tmpcfg);
     % transfo = tmpcfg.m;
     transfo = [
-        1.1500         0         0    5.7500
-        0    1.0800         0  -24.8400
-        0         0    1.0000  -25.0000
-        0         0         0    1.0000
+    1.1000         0         0         0
+         0    0.9526    0.5500  -22.0000
+         0   -0.5000    0.8660  -10.0000
+         0         0         0    1.0000
         ];
     elec = ft_transform_geometry(transfo,elec);
     

@@ -73,17 +73,17 @@ catch
     elec = ft_transform_geometry(transfo,elec);
     
     % tmpcfg = [];
-    % tmpcfg.individual.grad = grad;
-    % tmpcfg.template.elec = elec;
-    % tmpcfg = ft_interactiverealign(tmpcfg);
-    % transfo2 = tmpcfg.m;
+%     tmpcfg.individual.grad = grad;
+%     tmpcfg.template.elec = elec;
+%     tmpcfg = ft_interactiverealign(tmpcfg);
+%     transfo2 = tmpcfg.m;
     
     % stick grad to elec
     transfo2 = [
-        1     0     0     8
-        0     1     0   -30
-        0     0     1   -30
-        0     0     0     1
+    1.0000         0         0   -5.0000
+         0    0.9063    0.4226  -15.0000
+         0   -0.4226    0.9063  -20.0000
+         0         0         0    1.0000
         ];
     
     grad = ft_transform_geometry(transfo2,grad);

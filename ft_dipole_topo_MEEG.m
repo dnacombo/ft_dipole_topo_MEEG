@@ -323,10 +323,10 @@ if ~isempty(tag)
         ijk(2) = ijkorig(2) + opt.ijkmom(2);
     elseif strcmp(tag, 'ij')
         ijk([1 2])  = round(pos([1 2]));
-        ijk(3) = ijkorig(3) + opt.ijkmom(2);
+        ijk(3) = ijkorig(3) + opt.ijkmom(3);
     elseif strcmp(tag, 'jk')
         ijk([2 3])  = round(pos([2 3]));
-        ijk(1) = ijkorig(1) + opt.ijkmom(2);
+        ijk(1) = ijkorig(1) + opt.ijkmom(1);
     end
 end
 opt.ijkmom = ijk(:) - ijkorig(:);

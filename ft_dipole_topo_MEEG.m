@@ -218,7 +218,7 @@ cfg.comment = 'no';
 cfg.hotkeys = 'no';
 cfg.channel = 'megmag';
 cfg.colormap = varycolor(256,{'blue','white','red'});
-%     cfg.gridscale = 200;
+cfg.figure = gca;
 ft_topoplotER(cfg,tmp);
 title('MEG_{mag}','FontSize',20)
 
@@ -246,6 +246,7 @@ cfg.interactive = 'no';
 cfg.comment = 'no';
 cfg.hotkeys = 'no';
 cfg.channel = 'meggrad';
+cfg.figure = gca;
 ft_topoplotER(cfg,tmpdata);
 title('MEG_{grad}','FontSize',20)
 %%
@@ -264,7 +265,7 @@ cfg.zlim = [-1e-8 1e-8];%'maxabs';%
 cfg.interactive = 'no';
 cfg.comment = 'no';
 cfg.hotkeys = 'no';
-%     cfg.gridscale = 200;
+cfg.figure = gca;
 ft_topoplotER(cfg,tmp);
 title('EEG','FontSize',20)
 

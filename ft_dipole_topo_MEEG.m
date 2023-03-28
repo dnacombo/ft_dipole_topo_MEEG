@@ -165,7 +165,7 @@ set(gcf,'position',p .* [1 1 3 1])
 h(1).Units = 'normalized';
 
 axes(get(opt.ht1,'Parent'))
-opt.ht0 = text(0,0.9,'Click on slices to set dipole position','FontWeight','bold');
+opt.ht00 = text(0,0.9,'Click on slices to set dipole position','FontWeight','bold');
 opt.ht01 = text(0,0.8,'Shift + click to set dipole orientation','FontWeight','bold');
 
 opt.handlestopo(1) = axes('position',[0.3508    0.1100    0.2    0.7],'tag','topo_mag');
@@ -247,6 +247,7 @@ cfg.comment = 'no';
 cfg.hotkeys = 'no';
 cfg.channel = 'meggrad';
 cfg.figure = gca;
+cfg.colormap = varycolor(256,{'blue','white','red'});
 ft_topoplotER(cfg,tmpdata);
 title('MEG_{grad}','FontSize',20)
 %%
@@ -266,6 +267,7 @@ cfg.interactive = 'no';
 cfg.comment = 'no';
 cfg.hotkeys = 'no';
 cfg.figure = gca;
+cfg.colormap = varycolor(256,{'blue','white','red'});
 ft_topoplotER(cfg,tmp);
 title('EEG','FontSize',20)
 
